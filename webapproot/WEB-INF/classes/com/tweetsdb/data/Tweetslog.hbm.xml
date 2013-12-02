@@ -1,0 +1,30 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.tweetsdb.data.Tweetslog" table="tweetslog" catalog="tweetsdb" dynamic-insert="false" dynamic-update="false">
+        <id name="idtweetslog" type="integer">
+            <column name="idtweetslog"/>
+            <generator class="identity"/>
+        </id>
+        <property name="queryCreationDate" type="timestamp">
+            <column name="query_creation_date" length="19"/>
+        </property>
+        <property name="query" type="string">
+            <column name="query" length="45" not-null="true"/>
+        </property>
+        <property name="textQuery" type="string">
+            <column name="text_query" length="65535"/>
+        </property>
+        <property name="fullnameuser" type="string">
+            <column name="fullnameuser" length="60"/>
+        </property>
+        <property name="zone" type="string">
+            <column name="zone" length="45"/>
+        </property>
+        <property name="language" type="string">
+            <column name="language" length="2"/>
+        </property>
+        <property name="polarity" type="integer">
+            <column name="polarity" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+#main_body_app {
+    background-color: #3a92c8;
+    background: -webkit-radial-gradient(circle,#94d2f8,#3a92c8);
+    background: -moz-radial-gradient(circle,#94d2f8,#3a92c8);
+    background: -ms-radial-gradient(circle,#94d2f8,#3a92c8);
+}
+
+#main_title_h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    color: #fff;
+    letter-spacing: -3px;
+}
+
+#main_titleh2 {
+    font-family: 'Quicksand', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+}
+
+#main_por_label {
+    font-family: 'Quicksand', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+}
+
+#main_title3 {
+    font-family: "Quicksand", sans-serif;
+    color: #fff;
+    font-size: 1.2rem;
+}
+#main_title4 {
+    font-family: "Quicksand", sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    font-style: italic;
+}
+#login_loginMainPanel{
+    background-image: -webkit-gradient(
+    linear,
+	left top,
+	left bottom,
+	color-stop(0, #95BE0E),
+	color-stop(1, #B3E429)
+    );
+    background-image: -o-linear-gradient(bottom, #95BE0E 0%, #B3E429 100%);
+    background-image: -moz-linear-gradient(bottom, #95BE0E 0%, #B3E429 100%);
+    background-image: -webkit-linear-gradient(bottom, #95BE0E 0%, #B3E429 100%);
+    background-image: -ms-linear-gradient(bottom, #95BE0E 0%, #B3E429 100%);
+    background-image: linear-gradient(to bottom, #95BE0E 0%, #B3E429 100%);
+}

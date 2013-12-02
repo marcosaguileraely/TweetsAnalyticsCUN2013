@@ -1,0 +1,35 @@
+{
+	"methods": [{
+		"name": "getTweetslogById",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "id",
+			"type": "java.lang.Integer"
+		}],
+		"returnType": "com.tweetsdb.data.Tweetslog"
+	}, {
+		"name": "metrics",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "puser",
+			"type": "java.lang.String"
+		}, {
+			"name": "plang",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.tweetsdb.data.output.MetricsRtnType]"
+	}, {
+		"name": "resultTweets",
+		"operationType": "hqlquery",
+		"parameters": [{
+			"name": "user",
+			"type": "java.lang.String"
+		}, {
+			"name": "lang",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.tweetsdb.data.output.ResultTweetsRtnType]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "tweetsdb.json"
+}

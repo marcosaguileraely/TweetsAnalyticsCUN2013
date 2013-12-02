@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+
+<!-- Generated 12/01/2013 13:32:22
+
+Configuration for 'tweetsdb' database service
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+    <bean 
+        id="tweetsdb"
+        class="com.tweetsdb.Tweetsdb"
+        scope="singleton"
+        lazy-init="true">
+        <property name="dataServiceManager">
+            <ref bean="tweetsdbDataService"/>
+        </property>
+        <property name="taskManager">
+            <ref bean="tweetsdbTaskMgr"/>
+        </property>
+    </bean>
+
+
+    <bean 
+        class="com.wavemaker.runtime.data.spring.WMPropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:tweetsdb.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean 
+        id="tweetsdbDataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
+        lazy-init="true">
+        <property name="driverClassName" value="${tweetsdb.driverClassName}"/>
+        <property name="url" value="${tweetsdb.connectionUrl}"/>
+        <property name="username" value="${tweetsdb.username}"/>
+        <property name="password" value="${tweetsdb.password}"/>
+    </bean>
+
+
+    <bean 
+        id="tweetsdbTxMgr" 
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+        lazy-init="true">
+        <property name="sessionFactory">
+            <ref bean="tweetsdbSessionFactory"/>
+        </property>
+    </bean>
+
+
+    <bean 
+        id="tweetsdbHibernateTemplate"
+        class="org.springframework.orm.hibernate3.HibernateTemplate"
+        lazy-init="true">
+        <property name="sessionFactory"> 
+            <ref bean="tweetsdbSessionFactory"/>
+        </property>
+    </bean>  
+
+
+    <bean 
+        id="tweetsdbSessionFactory" 
+        class="com.wavemaker.runtime.data.spring.ConfigurationAndSessionFactoryBean"
+        lazy-init="true">
+
+        <!-- A unique name for this SessionFactory's configuration -->
+        <property name="name" value="tweetsdb"/>
+        <property name="dataSource" ref="tweetsdbDataSource"/>
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${tweetsdb.dialect}</prop>
+                <prop key="hibernate.transaction.factory_class">
+                    org.hibernate.transaction.JDBCTransactionFactory
+                </prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                
+            </props> 
+        </property>
+
+        <property name="mappingResources">
+            <list>
+
+<value>com/tweetsdb/data/Tweetslog.hbm.xml</value>
+<value>com/tweetsdb/data/Security.hbm.xml</value>
+
+<value>com/tweetsdb/data/Tweetslog.ql.xml</value>
+<value>com/tweetsdb/data/app-queries.ql.xml</value>
+
+            </list>
+        </property>
+
+    </bean>
+
+
+    <!-- the data service bean instance is injected into the service bean -->
+    <bean 
+        id="tweetsdbDataService" 
+        class="com.wavemaker.runtime.data.spring.SpringDataServiceManager"
+        lazy-init="true">
+        <constructor-arg>
+            <!-- the value of the "name" property of the SessionFactory -->
+            <value>tweetsdb</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="tweetsdbHibernateTemplate"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="tweetsdbTxMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="tweetsdbTaskMgr"/>
+        </constructor-arg>
+        <constructor-arg>
+            <map>
+                <entry key="useIndividualCRUDOperations" value="false"/>
+                <entry key="refreshEntities" value=""/> 
+            </map>
+        </constructor-arg>
+    </bean>
+
+
+    <bean 
+        id="tweetsdbTaskMgr"
+        class="com.wavemaker.runtime.data.DefaultTaskManager"
+        lazy-init="true"/>
+
+    <bean class="com.wavemaker.runtime.service.events.EventWire"
+        lazy-init="false">
+        <property name="serviceWire" ref="tweetsdbServiceWire"/>
+        <property name="eventListener">
+            <bean class="com.wavemaker.runtime.data.DataServiceEventListener"/>
+        </property>
+    </bean>
+
+    <bean id="tweetsdbServiceWire"
+        class="com.wavemaker.runtime.service.reflect.ReflectServiceWire"
+        lazy-init="false" scope="singleton">
+        <property name="serviceId" value="tweetsdb"/>
+        <property name="serviceType" ref="DataService"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,16 @@
+{
+	"methods": [{
+		"name": "start",
+		"operationType": null,
+		"parameters": [{
+			"name": "_user",
+			"type": "java.lang.String"
+		}, {
+			"name": "_lang",
+			"type": "java.lang.String"
+		}],
+		"returnType": "[com.cun.Tweet]"
+	}],
+	"serviceType": "JSON-RPC",
+	"serviceURL": "Tweets.json"
+}

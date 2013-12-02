@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.tweetsdb.data.Security" table="security" catalog="tweetsdb" dynamic-insert="false" dynamic-update="false">
+        <id name="idsecurity" type="integer">
+            <column name="idsecurity"/>
+            <generator class="identity"/>
+        </id>
+        <property name="nameuser" type="string">
+            <column name="nameuser" length="45"/>
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <meta attribute="@design.default-queries"/>
+    <query name="metrics">
+        <query-param name="puser" type="java.lang.String"/>
+        <query-param name="plang" type="java.lang.String"/>
+        select
+tlm.language as language,
+tlm.fullnameuser as name,
+tlm.polarity as polarity,
+count(tlm.polarity) as total_polar
+from Tweetslog tlm
+where tlm.fullnameuser=:puser and tlm.language=:plang
+group by tlm.polarity
+    </query>
+    <query name="resultTweets">
+        <query-param name="user" type="java.lang.String"/>
+        <query-param name="lang" type="java.lang.String"/>
+        select
+tl.idtweetslog as id,
+tl.fullnameuser as fullname,
+tl.query as user,
+tl.textQuery as text,
+tl.polarity as polar
+from Tweetslog tl where tl.fullnameuser=:user and tl.language=:lang
+    </query>
+</hibernate-mapping>
