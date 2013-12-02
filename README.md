@@ -4,8 +4,7 @@ Tesis de Grado<br>
 Autor: Marcos A. Aguilera Ely<br>
 Ing. de Sistemas<br>
 Bogotá D.C, CO<br>
-Diciembre 02 de 2013<br>
-
+Diciembre 02 de 2013
 ======================
 TweetsAnalyticsCUN2013
 ======================
